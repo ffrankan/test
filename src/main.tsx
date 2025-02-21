@@ -6,4 +6,4 @@ import './index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-root.render(<RouterProvider router={router} />);
+root.render(<RouterProvider future={{ v7_startTransition: true}} router={router} />);
