@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@tonejs/midi": "^2.0.28",
     "ahooks": "^3.7.8",
     "antd": "^5.11.5",
     "axios": "^1.6.2",
@@ -20,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
     "styled-components": "^6.1.1",
+    "tone": "^15.0.4",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
