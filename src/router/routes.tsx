@@ -11,7 +11,7 @@ import { tokenLoader } from './loader';
 const routes: RouteObject[] = [
   {
     path: '/login',
-    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/login'))} />,
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Login/index'))} />,
   },
   {
     path: '/melody',

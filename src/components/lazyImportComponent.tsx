@@ -1,6 +1,6 @@
-import { Suspense, LazyExoticComponent } from 'react';
+import React, { Suspense, LazyExoticComponent } from 'react';
 
-const LazyImportComponent = (props: { lazyChildren: LazyExoticComponent<() => JSX.Element> }) => {
+const LazyImportComponent = (props: { lazyChildren: LazyExoticComponent<() => JSX.Element> | React.FC}) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <props.lazyChildren />

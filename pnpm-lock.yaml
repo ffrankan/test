@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '-': ^0.0.1
+  '@ant-design/icons': ^5.6.1
   '@commitlint/cli': ^18.4.3
   '@commitlint/config-conventional': ^18.4.3
   '@tonejs/midi': ^2.0.28
@@ -38,6 +39,7 @@ specifiers:
 
 dependencies:
   '-': 0.0.1
+  '@ant-design/icons': 5.6.1_nnrd3gsncyragczmpvfhocinkq
   '@tonejs/midi': 2.0.28
   ahooks: 3.8.4_react@18.3.1
   antd: 5.24.1_nnrd3gsncyragczmpvfhocinkq
