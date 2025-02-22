@@ -45,6 +45,10 @@ const routes: RouteObject[] = [
         path: '/info',
         element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/info'))} />,
       },
+      {
+        path: '/pdf',
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/components/PdfView'))} />,
+      },
     ],
   },
   {
