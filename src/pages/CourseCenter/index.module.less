@@ -1,0 +1,258 @@
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(180deg, #e6f7ff 0%, #ffffff 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.pageHeader {
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  padding: 16px 24px;
+
+  :global {
+    .ant-page-header-heading-title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .ant-page-header-back {
+      margin-right: 16px;
+      
+      &-button {
+        font-size: 16px;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s;
+
+        &:hover {
+          background: #f0f0f0;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.courseCard {
+  background: #fff !important;
+  border: 1px solid #f0f0f0 !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #e6f7ff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    .expandIcon {
+      color: #1890ff;
+    }
+  }
+
+  :global(.ant-card-body) {
+    padding: 20px !important;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.titleSection {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.courseIcon {
+  font-size: 24px;
+  color: #1890ff;
+  padding: 12px;
+  background: rgba(24, 144, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+
+  .courseCard:hover & {
+    background: rgba(24, 144, 255, 0.15);
+  }
+}
+
+.courseTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.courseStats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+
+  .divider {
+    color: #d9d9d9;
+  }
+
+  :global(.anticon) {
+    margin-right: 4px;
+  }
+}
+
+.expandIcon {
+  color: #666;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  padding: 8px;
+  margin: -8px;
+}
+
+.progressSection {
+  :global(.ant-progress) {
+    line-height: 1;
+    
+    .ant-progress-bg {
+      height: 6px !important;
+      border-radius: 3px;
+    }
+
+    .ant-progress-text {
+      color: #666;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+  }
+}
+
+.progressText {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  
+  :global(.anticon) {
+    color: #52c41a;
+  }
+}
+
+// 抽屉样式
+.courseDrawer {
+  :global(.ant-drawer-header) {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  :global(.ant-drawer-body) {
+    padding: 0;
+  }
+}
+
+.drawerTitle {
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+}
+
+.drawerStats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+
+  .divider {
+    color: #d9d9d9;
+  }
+
+  :global(.anticon) {
+    margin-right: 4px;
+  }
+}
+
+.drawerContent {
+  padding: 24px;
+}
+
+.drawerProgress {
+  margin-bottom: 24px;
+}
+
+.chapterList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chapterItem {
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: #f0f7ff;
+  }
+
+  .chapterNumber {
+    display: block;
+    font-size: 14px;
+    color: #1890ff;
+    margin-bottom: 4px;
+  }
+}
+
+// 响应式设计
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 0 16px;
+  }
+
+  .courseGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .courseTitle {
+    font-size: 16px;
+  }
+
+  .courseIcon {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  .courseDrawer {
+    width: 100% !important;
+  }
+}
