@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, {useState, useCallback, useMemo, CSSProperties} from 'react';
 import { Radio } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import { styled } from 'styled-components'
@@ -35,8 +35,8 @@ interface ScoreAreaProps {
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
-    padding: 10px;
+  height: fit-content;
+  padding: 10px 0;
     .note-values {
       height: fit-content;
       .ant-radio-group {
@@ -50,9 +50,90 @@ const Container = styled.div`
           margin-right: 10px;
         }
       }
-      
-      
     }
+
+  .score-content {
+    height: 80px;
+    border: 1px solid #ddd;
+    position: relative;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .staff-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 60px;
+    /* 高音谱和低音谱之间的间距 */
+  }
+
+  .staff {
+    position: relative;
+    height: 50px;
+    cursor: pointer;
+    /* 添加指针样式表明可点击 */
+  }
+
+  .staff-lines {
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(to bottom,
+    #000 0px,
+    #000 1px,
+    transparent 1px,
+    transparent 12px);
+  }
+
+  .clef-symbol {
+    position: absolute;
+    left: 5px;
+    font-size: 80px;
+    line-height: 48px;
+    z-index: 1;
+  }
+
+  .treble-clef .clef-symbol {
+    top: -1px;
+  }
+
+  .treble-clef::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 48px;
+    top: 0px;
+    background-color: #000;
+  }
+
+  .bass-clef .clef-symbol {
+    top: -7px;
+    font-size: 60px;
+  }
+
+  .chord-control {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 16px;
+    border-radius: 4px;
+  }
+
+  .clef-beat {
+    position: absolute;
+    top: -9px;
+    font-size: 30px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .clef-beat span {
+    width: 16px;
+    height: 25px;
+  }
 `
 
 const ScoreArea: React.FC<ScoreAreaProps> = ({
@@ -125,8 +206,16 @@ const ScoreArea: React.FC<ScoreAreaProps> = ({
         return staffPosition > 24 ? 'rotate(180deg)' : 'none';
     }, []);
 
-    const clefBeatStyle = useMemo(() => ({
-        left: '50px'
+    const clefBeatStyle = useMemo((): CSSProperties => ({
+        position: 'absolute',
+        top: '-9px',
+        fontSize: '30px',
+        left: `${55 + (getKeySignature.count * 10) + (getKeySignature.count > 0 ? 10 : 0)}px`,
+        display: 'flex',
+        flexDirection: 'column',
+        width: '20px',
+        textAlign: 'center',
+        zIndex: 2
     }), []);
 
     const handleNoteValueChange = (e: RadioChangeEvent) => {

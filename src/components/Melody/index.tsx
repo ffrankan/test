@@ -199,7 +199,10 @@ const Melody = () => {
                     onNoteValueChange={setSelectedNoteValue}
                 />
             }
-            <ChordControl></ChordControl>
+            <ChordControl
+                currentKey={selectedKey}
+                onKeySelect={setSelectedKey}
+            />
         </Container>
     )
 }
