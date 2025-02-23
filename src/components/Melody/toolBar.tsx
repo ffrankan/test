@@ -7,6 +7,9 @@ interface ToolbarProps {
     onSaveScore?: () => void;
     onExportMIDI?: () => void;
     onPlayToggle?: () => void;
+    onSetModel?: (checked: boolean) => void;
+    timeSignature: string,
+    setTimeSignature: (value: string) => void;
     isPlaying?: boolean;
 }
 
@@ -41,11 +44,12 @@ const Toolbar: React.FC<ToolbarProps> = ({
          onSaveScore,
          onExportMIDI,
          onPlayToggle,
+         onSetModel,
+         timeSignature, setTimeSignature,
          isPlaying
      }) => {
     // 状态管理
     const [isEditMode, setIsEditMode] = useState(false);
-    const [timeSignature, setTimeSignature] = useState<string>('4/4');
     const [tempo, setTempo] = useState(60);
     const [instrument, setInstrument] = useState('piano');
 
@@ -56,12 +60,17 @@ const Toolbar: React.FC<ToolbarProps> = ({
         note: timeSignature.split('/')[1]
     };
 
+    const toggleModel = (checked: boolean) => {
+        setIsEditMode(checked);
+        onSetModel && onSetModel(checked)
+    }
+
     return (
         <Container>
             <div className="left-tools">
                 <Switch
                     checked={isEditMode}
-                    onChange={setIsEditMode}
+                    onChange={toggleModel}
                     checkedChildren="创作模式"
                     unCheckedChildren="预览模式"
                 />
