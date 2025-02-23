@@ -15,6 +15,7 @@ export const labs: LabItem[] = [
     icon: <ExperimentOutlined />,
     courses: 3,
     status: '最受欢迎',
+    statusColor: '#f5222d', 
     type: 'general'
   },
   {
@@ -24,6 +25,7 @@ export const labs: LabItem[] = [
     icon: <CustomerServiceOutlined />,
     courses: 2,
     status: '新课程',
+    statusColor: '#52c41a', 
     type: 'music'
   },
   {
@@ -33,6 +35,7 @@ export const labs: LabItem[] = [
     icon: <HeartOutlined />,
     courses: 2,
     status: '热门',
+    statusColor: '#faad14', 
     type: 'psychology'
   },
   {
@@ -42,6 +45,7 @@ export const labs: LabItem[] = [
     icon: <AppstoreAddOutlined />,
     courses: 3,
     status: '推荐',
+    statusColor: '#1890ff', 
     type: 'innovation'
   }
 ];
