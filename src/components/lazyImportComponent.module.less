@@ -1,0 +1,13 @@
+@import '../styles/variables.less';
+
+.loadingContainer {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  :global(.ant-spin) {
+    color: @primary-color;
+  }
+}
