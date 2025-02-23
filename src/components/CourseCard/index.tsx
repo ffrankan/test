@@ -89,14 +89,18 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, category, index }) => {
       <div className={styles.progressWrapper}>
         <Progress 
           percent={progress} 
-          showInfo={false}
-          strokeColor="#6366f1"
+          format={(percent) => (
+            <span className={styles.progressText}>
+              {course.completedLessons}/{course.totalLessons}
+            </span>
+          )}
+          strokeColor={{
+            '0%': '#818cf8',
+            '100%': '#6366f1',
+          }}
           trailColor="#f1f5f9"
           size="small"
         />
-        <span className={styles.progressText}>
-          {course.completedLessons}/{course.totalLessons}
-        </span>
       </div>
     </Card>
   );

@@ -111,23 +111,47 @@
 
 .progressWrapper {
   margin-top: 16px;
+  padding: 0 2px;
 
-  :global(.ant-progress) {
-    line-height: 1;
-    
-    .ant-progress-bg {
-      height: 6px !important;
-      border-radius: 3px;
-      background: @primary-color;
+  :global {
+    .ant-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      
+      .ant-progress-outer {
+        flex: 1;
+        margin: 0;
+        padding: 0;
+      }
+
+      .ant-progress-inner {
+        background-color: #f1f5f9;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .ant-progress-bg {
+        height: 4px !important;
+        border-radius: 4px;
+        background: @primary-color;
+      }
+
+      .ant-progress-text {
+        width: auto;
+        margin: 0;
+        font-size: 13px;
+        color: @text-color-secondary;
+      }
     }
   }
+}
 
-  .progressText {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    color: @text-color-secondary;
-    font-size: 14px;
-  }
+.progressText {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: @text-color-secondary;
+  min-width: 45px;
+  text-align: right;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
