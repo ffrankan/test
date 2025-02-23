@@ -79,11 +79,11 @@ const routes: RouteObject[] = [
         path: 'pdf',
         element: <LazyImportComponent lazyChildren={lazy(() => import('@/components/PdfView'))} />,
       },
+      {
+        path: '*',
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/NotFound'))} />,
+      },
     ]
-  },
-  {
-    path: '*',
-    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/notFound'))} />,
   },
 ];
 
