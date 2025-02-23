@@ -1,45 +1,30 @@
 import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { Layout, Menu, theme } from 'antd';
+import { LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import styled from 'styled-components';
-import { Outlet, NavLink, useNavigation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
-const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
+const items2: MenuProps['items'] = [LaptopOutlined, NotificationOutlined].map(
+  (icon, index) => {
+    const key = String(index + 1);
 
-const items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-    (icon, index) => {
-      const key = String(index + 1);
+    return {
+      key: `sub${key}`,
+      icon: React.createElement(icon),
+      label: `subnav ${key}`,
 
-      return {
-        key: `sub${key}`,
-        icon: React.createElement(icon as 'input'),
-        label: `subnav ${key}`,
-
-        children: new Array(4).fill(null).map((_, j) => {
-          const subKey = index * 4 + j + 1;
-          return {
-            key: subKey,
-            label: `option${subKey}`,
-          };
-        }),
-      };
-    },
+      children: new Array(4).fill(null).map((_, j) => {
+        const subKey = index * 4 + j + 1;
+        return {
+          key: subKey,
+          label: `option${subKey}`,
+        };
+      }),
+    };
+  },
 );
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  .ant-layout {
-    width: 100%;
-    height: 100%;
-  }
-`
 
 const App: React.FC = () => {
   const {
@@ -47,58 +32,32 @@ const App: React.FC = () => {
   } = theme.useToken();
 
   return (
-      <Container>
-          <Layout>
-              <Header style={{ display: 'flex', alignItems: 'center' }}>
-                  <div className="demo-logo" />
-                  <Menu
-                      theme="dark"
-                      mode="horizontal"
-                      defaultSelectedKeys={['2']}
-                      items={items1}
-                      style={{ flex: 1, minWidth: 0 }}
-                  />
-              </Header>
-              <Layout>
-                  <Sider
-                      breakpoint="lg"
-                      collapsedWidth="0"
-                      onBreakpoint={(broken) => {
-                          console.log(broken);
-                      }}
-                      onCollapse={(collapsed, type) => {
-                          console.log(collapsed, type);
-                      }}
-                      width={200}
-                      style={{ background: colorBgContainer }}>
-                      <Menu
-                          mode="inline"
-                          defaultSelectedKeys={['1']}
-                          defaultOpenKeys={['sub1']}
-                          style={{ height: '100%', borderRight: 0 }}
-                          items={items2}
-                      />
-                  </Sider>
-                  <Layout style={{ padding: '0 24px 24px' }}>
-                      <Breadcrumb
-                          items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]}
-                          style={{ margin: '16px 0' }}
-                      />
-                      <Content
-                          style={{
-                              padding: 24,
-                              margin: 0,
-                              minHeight: 280,
-                              background: colorBgContainer,
-                              borderRadius: borderRadiusLG,
-                          }}
-                      >
-                          <Outlet />
-                      </Content>
-                  </Layout>
-              </Layout>
-          </Layout>
-      </Container>
+    <Layout>
+      <Layout>
+        <Sider width={200} style={{ background: colorBgContainer }}>
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            defaultOpenKeys={['sub1']}
+            style={{ height: '100%', borderRight: 0 }}
+            items={items2}
+          />
+        </Sider>
+        <Layout style={{ padding: '0 24px 24px' }}>
+          <Content
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            <Outlet />
+          </Content>
+        </Layout>
+      </Layout>
+    </Layout>
   );
 };
 
