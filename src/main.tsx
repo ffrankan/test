@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import router from './router';
-import './index.scss';
+import './index.less';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
