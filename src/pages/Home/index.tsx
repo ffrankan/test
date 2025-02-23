@@ -1,7 +1,14 @@
 import React, { FC } from 'react';
-import { Card, Avatar, Dropdown, Menu } from 'antd';
-import { UserOutlined, LoginOutlined, LogoutOutlined } from '@ant-design/icons';
+import { Card, Badge } from 'antd';
+import { 
+  ExperimentOutlined,
+  CustomerServiceOutlined,
+  HeartOutlined,
+  AppstoreAddOutlined,
+  ArrowRightOutlined
+} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import UserAvatar from '@/components/UserAvatar';
 import { LabItem } from './types';
 import styles from './index.module.less';
 
@@ -12,22 +19,34 @@ const Home: FC = () => {
     {
       title: '通用AI实验室',
       description: '探索AI的基础应用和实验',
-      path: '/course-center/general'
+      path: '/course-center/general',
+      icon: <ExperimentOutlined />,
+      courses: 3,
+      status: '最受欢迎'
     },
     {
       title: '算法音乐实验室',
       description: '体验AI音乐创作与算法作曲',
-      path: '/course-center/algorithm'
+      path: '/course-center/algorithm',
+      icon: <CustomerServiceOutlined />,
+      courses: 2,
+      status: '新课程'
     },
     {
       title: 'AI心理实验室',
       description: '探索AI在心理学领域的应用',
-      path: '/course-center/psychology'
+      path: '/course-center/psychology',
+      icon: <HeartOutlined />,
+      courses: 2,
+      status: '热门'
     },
     {
       title: 'AI+N实验室',
       description: 'AI与其他领域的创新融合',
-      path: '/course-center/aiplus'
+      path: '/course-center/aiplus',
+      icon: <AppstoreAddOutlined />,
+      courses: 3,
+      status: '推荐'
     }
   ];
 
@@ -35,32 +54,10 @@ const Home: FC = () => {
     navigate(path);
   };
 
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
-  const handleLogout = () => {
-    // TODO: Implement logout logic here
-    console.log('Logging out...');
-  };
-
-  const menu = (
-    <Menu>
-      <Menu.Item key="login" onClick={handleLogin} icon={<LoginOutlined />}>
-        登录
-      </Menu.Item>
-      <Menu.Item key="logout" onClick={handleLogout} icon={<LogoutOutlined />}>
-        登出
-      </Menu.Item>
-    </Menu>
-  );
-
   return (
     <div className={styles.container}>
       <div className={styles.userSection}>
-        <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
-          <Avatar icon={<UserOutlined />} className={styles.avatar} />
-        </Dropdown>
+        <UserAvatar />
       </div>
       
       <div className={styles.content}>
@@ -77,8 +74,21 @@ const Home: FC = () => {
               onClick={() => handleLabClick(lab.path)}
               hoverable
             >
-              <h3>{lab.title}</h3>
-              <p>{lab.description}</p>
+              <Badge.Ribbon text={lab.status} color={index === 0 ? "blue" : index === 1 ? "green" : index === 2 ? "volcano" : "purple"}>
+                <div className={styles.cardContent}>
+                  <div className={styles.iconWrapper}>
+                    {lab.icon}
+                  </div>
+                  <div className={styles.labInfo}>
+                    <h3>{lab.title}</h3>
+                    <p>{lab.description}</p>
+                    <div className={styles.courseCount}>
+                      {lab.courses} 门课程
+                      <ArrowRightOutlined className={styles.arrow} />
+                    </div>
+                  </div>
+                </div>
+              </Badge.Ribbon>
             </Card>
           ))}
         </div>
