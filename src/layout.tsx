@@ -1,62 +1,54 @@
 import React from 'react';
-import { Layout, Menu, theme } from 'antd';
-import { LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Layout } from 'antd';
+import { Outlet, useLocation } from 'react-router-dom';
+import PageHeader from '@/components/PageHeader';
+import styles from './layout.module.less';
 
-const { Content, Sider } = Layout;
-
-const items2: MenuProps['items'] = [LaptopOutlined, NotificationOutlined].map(
-  (icon, index) => {
-    const key = String(index + 1);
-
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        };
-      }),
-    };
-  },
-);
+const { Content, Footer } = Layout;
 
 const App: React.FC = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  const getHeaderTitle = () => {
+    if (pathname === '/' || pathname === '/home') {
+      return '藤养学园AI交互式教学实验平台';
+    }
+    
+    const categoryMatch = pathname.match(/\/course-center\/([^/]+)/);
+    if (categoryMatch) {
+      const category = categoryMatch[1];
+      switch (category) {
+        case 'general':
+          return '通用 AI 实验室';
+        case 'algorithm':
+          return '算法音乐实验室';
+        case 'psychology':
+          return 'AI 心理实验室';
+        case 'aiplus':
+          return 'AI+N 实验室';
+        default:
+          return '课程中心';
+      }
+    }
+    return '藤养学园';
+  };
+
+  const showBack = pathname !== '/' && pathname !== '/home';
 
   return (
-    <Layout>
-      <Layout>
-        <Sider width={200} style={{ background: colorBgContainer }}>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-            items={items2}
-          />
-        </Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Outlet />
-          </Content>
-        </Layout>
-      </Layout>
+    <Layout className={styles.layout}>
+      <PageHeader 
+        title={getHeaderTitle()}
+        showBack={showBack}
+        backPath="/"
+      />
+      <Content>
+        <Outlet />
+      </Content>
+      <Footer>
+        {new Date().getFullYear()} 藤养学园AI交互式教学实验平台
+      </Footer>
     </Layout>
   );
 };

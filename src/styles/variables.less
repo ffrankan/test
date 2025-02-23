@@ -1,0 +1,193 @@
+// 颜色变量
+@primary-color: #4f46e5;    // 主色调：深靛蓝，代表专业和可信赖
+@secondary-color: #0ea5e9;  // 次要色：天蓝色，体现科技感
+@accent-color: #0ea5e9;    // 强调色：天蓝色，与次要色统一
+@info-color: #3b82f6;       // 信息色：蓝色，清晰易读
+@warning-color: #f59e0b;
+@error-color: #ef4444;
+
+// 功能色
+@success-color: #10b981;    // 成功色：翠绿色，柔和不刺眼
+@warning-color: #f59e0b;    // 警告色：橙色，醒目但不焦虑
+@error-color: #ef4444;      // 错误色：红色，鲜明但不激进
+@info-color: #3b82f6;       // 信息色：蓝色，清晰易读
+
+// 背景色系
+@bg-gradient-start: #fafafa;  // 渐变开始色：纯净白
+@bg-gradient-end: #f8fafc;    // 渐变结束色：淡蓝白
+@bg-card: #ffffff;            // 卡片背景色：纯白
+@bg-hover: rgba(79, 70, 229, 0.04); // 悬浮背景：柔和的主色调
+@background-color: #fafafa;    // 全局背景色：柔和的灰白
+
+// 文字颜色
+@heading-color: #1e293b;        // 标题色：深蓝灰，庄重但不沉重
+@text-color: #334155;           // 主文本色：深灰，清晰易读
+@text-color-secondary: #64748b; // 次要文本：中灰，与主文本形成层次
+@disabled-color: #94a3b8;       // 禁用文本：浅灰，降低存在感
+
+// 边框相关
+@border-color-base: #e2e8f0;    // 基础边框颜色：浅灰蓝
+@border-color-split: #f1f5f9;   // 分割线颜色：更浅的灰蓝
+@border-width-base: 1px;        // 边框基础宽度
+@border-style-base: solid;      // 边框基础样式
+@border-radius-base: 6px;       // 基础圆角：稍大的圆角提升亲和力
+@border-radius-lg: 8px;         // 大圆角：更圆润的边角
+
+// 阴影效果
+@shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+@shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+@shadow-hover: 0 8px 16px -4px rgba(79, 70, 229, 0.12);
+
+// 字体相关
+@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+@h1-size: 28px;      // 页面主标题：醒目但不夸张
+@h2-size: 24px;      // 区块标题：清晰的层级
+@h3-size: 20px;      // 卡片标题：适中的大小
+@h4-size: 18px;      // 小标题：良好的可读性
+@h5-size: 16px;      // 次要标题：基础文字大小
+@h6-size: 14px;      // 最小标题：补充信息大小
+@font-size-lg: 16px;   // 大号文本：正文主要大小
+@font-size-base: 14px; // 基础文本：次要信息大小
+@font-size-sm: 12px;   // 小号文本：辅助信息大小
+@font-weight-bold: 600;     // 重要标题
+@font-weight-medium: 500;   // 次要标题
+@font-weight-normal: 400;   // 正文文本
+@line-height-loose: 1.8;  // 正文段落
+@line-height-base: 1.5;   // 普通文本
+@line-height-tight: 1.2;  // 标题文本
+
+// 间距
+@padding-xs: 8px;
+@padding-sm: 12px;
+@padding-md: 16px;
+@padding-lg: 24px;
+@padding-xl: 32px;
+
+@margin-xs: 8px;
+@margin-sm: 12px;
+@margin-md: 16px;
+@margin-lg: 24px;
+@margin-xl: 32px;
+
+@spacing-xs: 8px;
+@spacing-sm: 12px;
+@spacing-md: 16px;
+@spacing-lg: 24px;
+@spacing-xl: 32px;
+
+// 响应式断点
+@screen-xs: 480px;     // 超小屏幕（手机）
+@screen-sm: 576px;     // 小屏幕（平板）
+@screen-md: 768px;     // 中等屏幕（小笔记本）
+@screen-lg: 992px;     // 大屏幕（桌面）
+@screen-xl: 1200px;    // 超大屏幕（大显示器）
+@screen-xxl: 1600px;
+
+// 实验室主题色
+@lab-theme-color: @primary-color;
+@lab-icon-color: @primary-color;
+@lab-tag-bg: rgba(79, 70, 229, 0.1);
+@lab-hover-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);
+
+// 实验室卡片主题
+@lab-theme-colors: {
+  general: @primary-color;    // 通用AI实验室
+  music: #ec4899;            // 音乐实验室：粉色
+  psychology: #8b5cf6;       // 心理实验室：紫色
+  innovation: #06b6d4;       // 创新实验室：青色
+}
+
+// 标签样式
+@tag-bg-opacity: 0.1;
+@tag-text-opacity: 0.9;
+
+// 动画
+@transition-base: all 0.2s ease;
+@transition-hover: all 0.2s ease-in-out;
+
+// 实验室卡片混入
+.lab-card-theme(@color) {
+  background: linear-gradient(135deg, fade(@color, 2%) 0%, @bg-card 100%);
+  border: 1px solid fade(@color, 10%);
+  
+  .icon {
+    color: @color;
+  }
+  
+  .status {
+    background: fade(@color, @tag-bg-opacity * 100%);
+    color: fade(@color, @tag-text-opacity * 100%);
+  }
+  
+  &:hover {
+    border-color: fade(@color, 20%);
+    box-shadow: 0 4px 20px fade(@color, 15%);
+    background: linear-gradient(135deg, fade(@color, 3%) 0%, @bg-card 100%);
+  }
+}
+
+// 卡片样式
+.card-base() {
+  background: @white;
+  border-radius: @border-radius-base;
+  padding: @spacing-md;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+  
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+// 标题样式
+.title-base() {
+  color: @heading-color;
+  font-weight: 500;
+  margin-bottom: @spacing-md;
+}
+
+// 按钮基础样式
+.button-base() {
+  border-radius: @border-radius-base;
+  padding: @spacing-sm @spacing-md;
+  font-size: @font-size-base;
+  transition: all 0.3s;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+// 实验室卡片统一样式
+.lab-card() {
+  .card-base();
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  .title {
+    .title-base();
+    font-size: @font-size-lg;
+  }
+  
+  .description {
+    color: @text-color;
+    margin-bottom: @spacing-md;
+  }
+  
+  .footer {
+    color: @text-color-secondary;
+    font-size: @font-size-sm;
+  }
+}
+
+// 布局通用样式
+.container-base() {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: @spacing-lg;
+}

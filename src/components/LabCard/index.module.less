@@ -1,0 +1,77 @@
+@import '../../styles/variables.less';
+
+.labCard {
+  position: relative;
+  padding: 24px;
+  border-radius: @border-radius-lg;
+  background: #fff;
+  border: 1px solid @border-color-base;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &:hover {
+    border-color: @primary-color !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    .icon {
+      color: @primary-color;
+    }
+
+    .arrow {
+      opacity: 1;
+    }
+  }
+}
+
+.icon {
+  font-size: 24px;
+  color: #4b5563;
+  transition: all 0.2s ease;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.description {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.courses {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.status {
+  font-size: 12px;
+  color: @primary-color;
+  background: #f3f4f6;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.arrow {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 14px;
+  color: #4b5563;
+  opacity: 0;
+  transition: all 0.2s ease;
+}

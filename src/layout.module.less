@@ -1,0 +1,65 @@
+@import './styles/variables.less';
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, @bg-gradient-start 0%, @bg-gradient-end 100%);
+
+  :global {
+    .ant-layout-header {
+      background: @bg-card;
+      box-shadow: @shadow-sm;
+      border-bottom: 1px solid @border-color-split;
+      padding: 0 24px;
+      height: 56px; 
+      line-height: 56px;
+      z-index: 10;
+    }
+
+    .ant-layout-content {
+      flex: 1;
+      padding: 0; 
+      background: transparent;
+      min-height: calc(100vh - 112px); 
+      display: flex; 
+      flex-direction: column; 
+    }
+
+    .ant-layout-footer {
+      text-align: center;
+      background: @bg-card;
+      color: @text-color-secondary;
+      padding: 12px; 
+      border-top: 1px solid @border-color-split;
+      height: 56px; 
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    :global {
+      .ant-layout-header {
+        padding: 0 16px;
+      }
+
+      .ant-layout-content {
+        padding: 0; 
+      }
+    }
+  }
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #666;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding-top: 56px;
+    min-height: calc(100vh - 56px - 89px); 
+  }
+}

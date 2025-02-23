@@ -1,0 +1,145 @@
+@import './variables.less';
+
+// 重置默认样式
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// 设置根字体大小
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 基础样式
+body {
+  font-family: @font-family;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @text-color;
+  background-color: @bg-gradient-start;
+}
+
+// 标题样式系统
+h1 {
+  font-size: @h1-size;
+  font-weight: @font-weight-bold;
+  line-height: @line-height-tight;
+  color: @heading-color;
+  margin-bottom: @spacing-lg;
+}
+
+h2 {
+  font-size: @h2-size;
+  font-weight: @font-weight-bold;
+  line-height: @line-height-tight;
+  color: @heading-color;
+  margin-bottom: @spacing-md;
+}
+
+h3 {
+  font-size: @h3-size;
+  font-weight: @font-weight-medium;
+  line-height: @line-height-tight;
+  color: @heading-color;
+  margin-bottom: @spacing-md;
+}
+
+h4 {
+  font-size: @h4-size;
+  font-weight: @font-weight-medium;
+  line-height: @line-height-tight;
+  color: @heading-color;
+  margin-bottom: @spacing-sm;
+}
+
+h5 {
+  font-size: @h5-size;
+  font-weight: @font-weight-medium;
+  line-height: @line-height-base;
+  color: @heading-color;
+  margin-bottom: @spacing-sm;
+}
+
+h6 {
+  font-size: @h6-size;
+  font-weight: @font-weight-medium;
+  line-height: @line-height-base;
+  color: @heading-color;
+  margin-bottom: @spacing-sm;
+}
+
+// 段落样式
+p {
+  margin-bottom: @spacing-md;
+  line-height: @line-height-loose;
+}
+
+// 链接样式
+a {
+  color: @primary-color;
+  text-decoration: none;
+  transition: @transition-base;
+
+  &:hover {
+    color: darken(@primary-color, 10%);
+  }
+}
+
+// 实验室卡片容器
+.lab-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: @spacing-lg;
+  .container-base();
+}
+
+// 通用实验室卡片样式
+.lab-item {
+  .lab-card();
+}
+
+// 通用按钮样式
+.btn {
+  .button-base();
+  
+  &.primary {
+    background-color: @primary-color;
+    color: @white;
+    border: none;
+  }
+  
+  &.secondary {
+    background-color: @white;
+    color: @primary-color;
+    border: 1px solid @primary-color;
+  }
+}
+
+// 页面容器
+.page-container {
+  .container-base();
+}
+
+// 响应式调整
+@media screen and (max-width: @screen-md) {
+  html {
+    font-size: 15px;
+  }
+
+  h1 { font-size: @h2-size; }
+  h2 { font-size: @h3-size; }
+  h3 { font-size: @h4-size; }
+  h4 { font-size: @h5-size; }
+  h5 { font-size: @h6-size; }
+  h6 { font-size: @font-size-base; }
+}
+
+@media screen and (max-width: @screen-sm) {
+  html {
+    font-size: 14px;
+  }
+}

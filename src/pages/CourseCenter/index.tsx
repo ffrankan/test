@@ -1,25 +1,13 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Card, Progress, Badge, Tooltip } from 'antd';
-import { 
-  BookOutlined, 
-  ClockCircleOutlined,
-  CheckCircleOutlined
-} from '@ant-design/icons';
-import CustomPageHeader from '@/components/PageHeader';
+import { useParams } from 'react-router-dom';
+import { Empty } from 'antd';
+import CourseCard, { Course } from '@/components/CourseCard';
 import styles from './index.module.less';
 
 interface CourseCategory {
   title: string;
   description: string;
   courses: Course[];
-}
-
-interface Course {
-  title: string;
-  chapters: string[];
-  totalLessons: number;
-  completedLessons: number;
 }
 
 const categoryMap: Record<string, CourseCategory> = {
@@ -164,91 +152,37 @@ const categoryMap: Record<string, CourseCategory> = {
 };
 
 const CourseCenter: React.FC = () => {
-  const { category } = useParams<{ category: string }>();
-  const navigate = useNavigate();
-  const currentCategory = category ? categoryMap[category] : null;
-
-  if (!currentCategory) {
-    return <div>未找到相关课程</div>;
-  }
-
-  const getProgressStatus = (completed: number, total: number) => {
-    const percent = (completed / total) * 100;
-    if (percent === 0) return 'notStarted';
-    if (percent === 100) return 'completed';
-    return 'inProgress';
-  };
-
-  const getStatusBadge = (completed: number, total: number) => {
-    const status = getProgressStatus(completed, total);
-    switch (status) {
-      case 'completed':
-        return <Badge color="green" text="已完成" />;
-      case 'inProgress':
-        return <Badge color="blue" text="学习中" />;
-      default:
-        return <Badge color="gray" text="未开始" />;
-    }
-  };
-
-  const handleCourseClick = (courseTitle: string) => {
-    // 使用课程标题作为URL参数，实际项目中应该使用courseId
-    const courseParam = encodeURIComponent(courseTitle);
-    navigate(`/course-center/${category}/course/${courseParam}`);
-  };
+  const { category = 'general' } = useParams();
+  const currentCategory = categoryMap[category];
+  const courses = currentCategory?.courses || [];
 
   return (
     <div className={styles.container}>
-      <CustomPageHeader
-        title={currentCategory.title}
-        backPath="/"
-      />
-      <div className={styles.content}>
+      {courses.length > 0 ? (
         <div className={styles.courseGrid}>
-          {currentCategory.courses.map((course, index) => (
-            <Card
+          {courses.map((course, index) => (
+            <CourseCard
               key={index}
-              className={styles.courseCard}
-              onClick={() => handleCourseClick(course.title)}
-            >
-              <div className={styles.cardHeader}>
-                <div className={styles.titleSection}>
-                  <BookOutlined className={styles.courseIcon} />
-                  <div>
-                    <h3 className={styles.courseTitle}>{course.title}</h3>
-                    <div className={styles.courseStats}>
-                      <Tooltip title="课程数">
-                        <span><ClockCircleOutlined /> {course.totalLessons} 课时</span>
-                      </Tooltip>
-                      <span className={styles.divider}>|</span>
-                      {getStatusBadge(course.completedLessons, course.totalLessons)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.progressSection}>
-                <Progress
-                  percent={Math.round((course.completedLessons / course.totalLessons) * 100)}
-                  size="small"
-                  format={(percent) => {
-                    const isCompleted = percent === 100;
-                    return (
-                      <span className={styles.progressText}>
-                        {isCompleted ? (
-                          <><CheckCircleOutlined /> 已完成</>
-                        ) : (
-                          `${course.completedLessons}/${course.totalLessons}`
-                        )}
-                      </span>
-                    );
-                  }}
-                />
-              </div>
-            </Card>
+              course={course}
+              category={category}
+              index={index}
+            />
           ))}
         </div>
-      </div>
+      ) : (
+        <div className={styles.emptyState}>
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description={
+              <span>
+                该实验室暂无课程
+                <br />
+                敬请期待更多精彩内容
+              </span>
+            }
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,133 @@
+@import '../../styles/variables.less';
+
+.courseCard {
+  background: @bg-card !important;
+  border: 1px solid @border-color-base !important;
+  border-radius: @border-radius-lg !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    border-color: @primary-color !important;
+    box-shadow: @shadow-hover;
+
+    .expandIcon {
+      color: @primary-color;
+    }
+  }
+
+  :global(.ant-card-body) {
+    padding: 16px !important;
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .courseInfo {
+    flex: 1;
+
+    .courseTitle {
+      color: @heading-color;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .courseStatus {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: @text-color-secondary;
+      font-size: 14px;
+
+      .lessonCount {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .separator {
+        color: @border-color-base;
+      }
+
+      .status {
+        position: relative;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 13px;
+        background: @border-color-split;
+        color: @text-color-secondary;
+        
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          margin-right: 4px;
+          vertical-align: 1px;
+          background-color: currentColor;
+        }
+
+        &.inProgress {
+          color: @primary-color;
+          background: fade(@primary-color, 4%);
+        }
+
+        &.completed {
+          color: @success-color;
+          background: fade(@success-color, 4%);
+        }
+
+        &.notStarted {
+          color: @text-color-secondary;
+          background: @border-color-split;
+        }
+      }
+    }
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: fade(@primary-color, 8%);
+  color: @primary-color;
+  transition: all 0.3s ease;
+
+  .icon {
+    font-size: 20px;
+  }
+}
+
+.progressWrapper {
+  margin-top: 16px;
+
+  :global(.ant-progress) {
+    line-height: 1;
+    
+    .ant-progress-bg {
+      height: 6px !important;
+      border-radius: 3px;
+      background: @primary-color;
+    }
+  }
+
+  .progressText {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: @text-color-secondary;
+    font-size: 14px;
+  }
+}

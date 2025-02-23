@@ -1,179 +1,69 @@
+@import '../../styles/variables.less';
+
 .container {
-  min-height: 100vh;
-  width: 100vw;
-  background: linear-gradient(180deg, #e6f7ff 0%, #ffffff 100%);
-  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, @bg-gradient-start 0%, @bg-gradient-end 100%);
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
-}
-
-.userSection {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
+  justify-content: center;
 }
 
 .content {
-  flex: 1;
-  width: 100%;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
+  padding: @spacing-xl 0;
 }
 
-.banner {
+.header {
   text-align: center;
-  padding: 40px 0;
-  margin-top: 20px;
+  margin-bottom: @spacing-xl;
 
   h1 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 12px;
-    color: #1a1a1a;
+    font-size: @h1-size;
+    color: @heading-color;
+    margin-bottom: @spacing-md;
+    font-weight: 500;
   }
 
   p {
-    font-size: 16px;
-    color: #666;
+    font-size: @font-size-base;
+    color: @text-color-secondary;
   }
 }
 
 .labGrid {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  padding: 0 20px;
-  margin-top: 10px;
+  gap: @spacing-lg;
+  width: 100%;
 }
 
-.labCard {
-  border-radius: 12px !important;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  height: auto;
-  min-height: 160px;
-  background: #fff;
-  border: 1px solid #f0f0f0 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-
-  :global(.ant-card-body) {
-    padding: 24px !important;
-  }
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  }
-}
-
-.cardContent {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.iconWrapper {
-  font-size: 32px;
-  color: #1890ff;
-  padding: 16px;
-  background: rgba(24, 144, 255, 0.1);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-
-  .labCard:hover & {
-    background: rgba(24, 144, 255, 0.15);
-    transform: scale(1.05);
-  }
-}
-
-.labInfo {
-  flex: 1;
-
-  h3 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #1a1a1a;
-  }
-
-  p {
-    color: #666;
-    margin: 0 0 16px;
-    line-height: 1.5;
-  }
-}
-
-.courseCount {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #f0f0f0;
-  color: #666;
-  font-size: 14px;
-}
-
-.arrow {
-  color: #1890ff;
-  transition: transform 0.3s ease;
-
-  .labCard:hover & {
-    transform: translateX(4px);
-  }
-}
-
-// 响应式设计
-@media screen and (max-width: 1200px) {
-  .labGrid {
-    padding: 0 16px;
-    gap: 16px;
-  }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: @screen-md) {
   .content {
-    padding: 0 12px;
+    width: 95%;
+    padding: @spacing-lg 0;
   }
 
-  .banner {
-    padding: 30px 0;
-    
+  .header {
     h1 {
-      font-size: 24px;
-    }
-    
-    p {
-      font-size: 14px;
+      font-size: @h1-size - 4px;
+      margin-bottom: @spacing-md;
     }
   }
+}
 
+@media screen and (max-width: @screen-sm) {
   .labGrid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 
-  .cardContent {
-    gap: 16px;
-  }
+  .header {
+    margin-bottom: @spacing-md;
 
-  .iconWrapper {
-    font-size: 24px;
-    padding: 12px;
-  }
-
-  .labInfo {
-    h3 {
-      font-size: 18px;
+    h1 {
+      font-size: @h1-size - 6px;
     }
   }
 }

@@ -12,8 +12,8 @@ import styles from './index.module.less';
 
 // 模拟默认用户数据
 const defaultUser = {
-  name: '张同学',
-  email: 'zhang@tsinghua.edu.cn',
+  name: 'Frank同学',
+  email: 'frankan@ontenfuture.com',
   avatar: 'https://api.dicebear.com/7.x/miniavs/svg?seed=1'  // 使用 dicebear 生成的默认头像
 };
 
@@ -40,7 +40,6 @@ const UserAvatar: React.FC = () => {
           <div className={styles.userEmail}>{defaultUser.email}</div>
         </div>
       </div>
-      <Menu.Divider />
       <Menu.Item key="profile" onClick={handleProfile} icon={<UserSwitchOutlined />}>
         个人信息
       </Menu.Item>
@@ -59,14 +58,12 @@ const UserAvatar: React.FC = () => {
 
   return (
     <div className={styles.userAvatar}>
-      <Dropdown 
-        overlay={menu} 
-        placement="bottomRight" 
-        trigger={['click']}
-      >
+      <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
         <Avatar 
-          src={defaultUser.avatar}
           className={styles.avatar}
+          size={32}
+          src={defaultUser.avatar}
+          icon={<UserOutlined />}
         />
       </Dropdown>
     </div>
