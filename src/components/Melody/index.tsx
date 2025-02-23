@@ -1,8 +1,8 @@
 import React, { FC } from'react';
 import { styled } from 'styled-components';
-import ToolBar from './components/toolbar';
-import ScoreArea from './components/scoreArea';
-import ChordControl from './components/chordControl';
+import ToolBar from './toolBar';
+import ScoreArea from './scoreArea';
+import ChordControl from './chordControl';
 
 const Melody = () => {
 

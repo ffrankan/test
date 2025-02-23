@@ -15,7 +15,7 @@ const routes: RouteObject[] = [
   },
   {
     path: '/melody',
-    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Melody'))} />,
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/components/Melody'))} />,
   },
   {
     path: '/',
