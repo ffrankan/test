@@ -1,41 +1,123 @@
 .container {
-  height: 100vh;
-}
-
-.sider {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(180deg, #e6f7ff 0%, #ffffff 100%);
   position: relative;
-  left: 0;
-  height: 100vh;
-  background: #001529;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-.logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.2);
-}
+.userSection {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
 
-.header {
-  padding: 0;
-  background: #fff;
-}
+  .avatar {
+    cursor: pointer;
+    color: #666;
+    background: transparent;
+    transition: transform 0.2s ease;
 
-.trigger {
-  padding: 0 24px;
-  font-size: 18px;
-  line-height: 64px;
-  cursor: pointer;
-  transition: color 0.3s;
-
-  &:hover {
-    color: #1890ff;
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
 
 .content {
-  margin: 24px 16px;
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.banner {
+  text-align: center;
+  padding: 60px 0;
+  margin-top: 40px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666;
+  }
+}
+
+.labGrid {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+.labCard {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 24px;
-  background: #fff;
-  min-height: 280px;
-  border-radius: 4px;
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+  }
+
+  p {
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+// 响应式设计
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 0 16px;
+  }
+
+  .banner {
+    padding: 40px 0;
+    margin-top: 20px;
+
+    h1 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .labGrid {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 16px;
+  }
+
+  .labCard {
+    height: 150px;
+    padding: 20px;
+  }
 }

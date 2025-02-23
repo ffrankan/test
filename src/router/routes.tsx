@@ -19,37 +19,61 @@ const routes: RouteObject[] = [
   },
   {
     path: '/',
-    loader: protectedLoader,
-    element: <LazyImportComponent lazyChildren={lazy(() => import('@/layout'))} />,
-    errorElement: <ErrorBoundary />,
+    element: <Navigate to="/home" replace={true} />,
+  },
+  {
+    path: '/home',
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
     children: [
       {
-        index: true,
-        element: <Navigate to={'/user'} replace={true} />,
+        path: '',
+        element: <Navigate to="/home/general" replace />,
       },
       {
-        path: '/user',
-        loader: usersLoader,
-        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/user'))} />,
+        path: 'general',
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
       },
       {
-        path: '/manage',
-        loader: tokenLoader,
-        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/manage'))} />,
+        path: 'algorithm',
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
       },
       {
-        path: '/file/:id?',
-        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/file'))} />,
+        path: 'psychology',
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
       },
       {
-        path: '/info',
-        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/info'))} />,
-      },
-      {
-        path: '/pdf',
-        element: <LazyImportComponent lazyChildren={lazy(() => import('@/components/PdfView'))} />,
+        path: 'aiplus',
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
       },
     ],
+  },
+  {
+    path: '/course-center/:category',
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/CourseCenter'))} />,
+  },
+  {
+    path: '/user',
+    loader: protectedLoader,
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/user'))} />,
+  },
+  {
+    path: '/manage',
+    loader: tokenLoader,
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/manage'))} />,
+  },
+  {
+    path: '/file/:id?',
+    loader: protectedLoader,
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/file'))} />,
+  },
+  {
+    path: '/info',
+    loader: protectedLoader,
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/info'))} />,
+  },
+  {
+    path: '/pdf',
+    element: <LazyImportComponent lazyChildren={lazy(() => import('@/components/PdfView'))} />,
   },
   {
     path: '*',
