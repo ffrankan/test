@@ -31,7 +31,7 @@ const App: React.FC = () => {
           return '课程中心';
       }
     }
-    return '藤养学园';
+    return '藤养学园AI交互式教学实验平台';
   };
 
   const showBack = pathname !== '/' && pathname !== '/home';
