@@ -5,12 +5,12 @@
 
 .avatar {
   cursor: pointer;
-  transition: all 0.3s;
-  border: 2px solid #1890ff;
+  outline: none;
   
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  :global {
+    .ant-dropdown-trigger {
+      outline: none;
+    }
   }
 }
 
