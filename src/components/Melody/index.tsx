@@ -4,6 +4,8 @@ import ToolBar from './toolBar';
 import ScoreArea from './scoreArea';
 import ChordControl from './chordControl';
 import {notePositions} from './common'
+import { Slider } from 'antd';
+import { getSampler } from '@/utils/sampler'
 
 // 定义调号类型
 interface KeySignature {
@@ -14,7 +16,16 @@ interface KeySignature {
 const Container = styled.div`
     width: 100%;
     height: 100vh;
-    `
+    color: #1a1a1a;
+    background-color: #f0f0f0;
+  
+    .keyboard-slider { 
+      margin: 10px 0;
+      padding: 0 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+`
 
 const Melody = () => {
     const [isEditModel, setIsEditModel] = useState<boolean>(false);
@@ -25,7 +36,13 @@ const Melody = () => {
     const [currentPosition, setCurrentPosition] = useState<number>(0);  // 当前编辑位置
     const [notes, setNotes] = useState([])
     const [selectedKey, setSelectedKey] = useState('major_C')
+    const [maxSliderValue, setMaxSliderValue] = useState(0)
     const [selectedNoteValue, setSelectedNoteValue] = useState('whole')  // 选中的音符时值
+    const [startX, setStartX] = useState(0)
+    const [startOffset, setStartOffset] = useState(0)
+
+    let isDragging = false
+    let sampler
 
     // 计算音符在五线谱上的位置
     const calculateStaffPosition = (noteKey) => {
@@ -172,9 +189,113 @@ const Melody = () => {
         }
     };
 
+    // 修改generateAllKeys函数，导出键盘总长度
+    const generateAllKeys = () => {
+        const octaveNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+        const allWhiteKeys = [];
+        const allBlackKeys = [];
+
+        // 生成88键的所有键位（A0到C8）
+        for (let octave = 0; octave <= 8; octave++) {
+            octaveNotes.forEach(note => {
+                if (
+                    (octave === 0 && ['A', 'B'].includes(note)) || // A0-B0
+                    (octave >= 1 && octave <= 7) || // 完整的1-7八度
+                    (octave === 8 && ['C'].includes(note)) // C8
+                ) {
+                    allWhiteKeys.push({
+                        key: `${note}${octave}`,
+                        label: `${note}${octave}`
+                    });
+                }
+            });
+        }
+
+        // 生成黑键
+        for (let i = 0; i < allWhiteKeys.length - 1; i++) {
+            const currentNote = allWhiteKeys[i].key[0];
+            const currentOctave = allWhiteKeys[i].key.slice(-1);
+
+            if (!['E', 'B'].includes(currentNote)) {
+                allBlackKeys.push({
+                    key: `${currentNote}#${currentOctave}`,
+                    label: `${currentNote}#${currentOctave}`
+                });
+            } else {
+                allBlackKeys.push({ key: '', label: '' });
+            }
+        }
+
+        // 计算最大滑动值
+        setMaxSliderValue(allWhiteKeys.length - 19) // 19是可见白键数量
+
+        return { allWhiteKeys, allBlackKeys };
+    };
+
+    const visibleKeys = useMemo(() => {
+        const { allWhiteKeys, allBlackKeys } = generateAllKeys();
+        const keysPerView = 19;
+
+        // 使用 keyboardOffset 作为起始索引
+        let startIndex = keyboardOffset;
+
+        return {
+            whiteKeys: allWhiteKeys.slice(startIndex, startIndex + keysPerView),
+            blackKeys: allBlackKeys.slice(startIndex, startIndex + keysPerView - 1)
+        };
+    }, [keyboardOffset])
+
+    // 添加判断是否为最后一个键的函数
+    const isLastKey = (noteKey) => {
+        const lastKey = visibleKeys.whiteKeys[visibleKeys.whiteKeys.length - 1].key;
+        return noteKey === lastKey;
+    };
+
+    // 修改handleDragMove函数，使其同步更新滑块值
+    const handleDragMove = (e) => {
+        if (!isDragging) return;
+
+        const diff = (e.clientX - startX) / 30;
+        const newOffset = Math.round(startOffset - diff);
+
+        // 限制拖动范围
+        const boundedOffset = Math.max(0, Math.min(newOffset, maxSliderValue));
+        setKeyboardOffset(boundedOffset)
+         // 同步更新滑块值
+        setKeyboardSliderValue(boundedOffset)
+    };
+    // 添加拖动事件处理函数
+    const handleDragStart = (e) => {
+        isDragging = true;
+        setStartX(e.clientX)
+        setStartOffset(keyboardOffset)
+    };
+
+    const handleDragEnd = () => {
+        isDragging = false;
+    };
+
+    // 添加播放音符的方法
+    const playNote = (note) => {
+        if (sampler) {
+            sampler.triggerAttackRelease(note, '8n');
+        }
+    };
+
+    // 修改handleSliderChange函数，使其同步更新滑块值
+    const handleSliderChange = (value) => {
+        setKeyboardOffset(value)
+        setKeyboardSliderValue(value)
+    };
+
+    const getSampleData = async () => {
+        sampler = await getSampler()
+    };
+
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
+        getSampleData()
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         }
@@ -203,6 +324,14 @@ const Melody = () => {
                 currentKey={selectedKey}
                 onKeySelect={setSelectedKey}
             />
+            <div className="keyboard-slider">
+                <Slider
+                    value={keyboardSliderValue}
+                    min={0}
+                    max={maxSliderValue}
+                    onChange={handleSliderChange}
+                />
+            </div>
         </Container>
     )
 }
