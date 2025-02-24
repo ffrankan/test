@@ -1,14 +1,22 @@
 // 课程中心页面使用的课程信息
 import {Lab} from "@/types/lab.ts";
 
+interface Teacher {
+  id: number;
+  name: string;
+  title: string;
+  avatar?: string;
+  description: string;
+}
+
 export interface CourseOverview {
     id: number;
     title: string;
     description: string;
     lab: Lab;
-    duration: string;
     totalLessons: number;
     grade: number;
+    teacher: Teacher;
 }
 
 

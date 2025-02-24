@@ -1,0 +1,538 @@
+@import '@/styles/variables.less';
+
+.container {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+  padding: @spacing-xl;
+  background: linear-gradient(135deg, @bg-gradient-start 0%, @bg-gradient-end 100%);
+}
+
+.content {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: @spacing-xl 0;
+  display: grid;
+  gap: @spacing-xl;
+}
+
+.pageHeader {
+  background: @bg-card;
+  border-radius: @border-radius-lg;
+  margin-bottom: @spacing-xl;
+  box-shadow: @shadow-sm;
+
+  :global {
+    .ant-page-header-heading-title {
+      font-size: @h1-size;
+      font-weight: @font-weight-medium;
+      color: @heading-color;
+      margin-bottom: @spacing-md;
+    }
+
+    .ant-page-header-back {
+      margin-right: @spacing-md;
+      
+      &-button {
+        font-size: @font-size-lg;
+        padding: @spacing-md;
+        border-radius: @border-radius-lg;
+        transition: all 0.3s;
+
+        &:hover {
+          background: #f0f0f0;
+        }
+      }
+    }
+  }
+}
+
+.courseGrid {
+  display: grid;
+  gap: 20px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
+
+  grid-template-columns: repeat(1, 1fr);
+
+  @media screen and (min-width: @screen-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: @screen-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: @screen-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: @screen-xl) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.emptyState {
+  width: 90%;
+  max-width: 800px;
+  margin: 60px auto;
+  text-align: center;
+  background: @bg-card;
+  padding: 32px;
+  border-radius: @border-radius-lg;
+  box-shadow: @shadow-md;
+  border: 1px solid @border-color-base;
+
+  :global(.ant-empty-description) {
+    color: @text-color-secondary;
+    font-size: @font-size-lg;
+    line-height: 1.6;
+  }
+}
+
+.courseCard {
+  background: #fff !important;
+  border: 1px solid @border-color-base !important;
+  border-radius: @border-radius-lg !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    border-color: @primary-color !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    .expandIcon {
+      color: @primary-color;
+    }
+  }
+
+  :global(.ant-card-body) {
+    padding: @padding-lg !important;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: @spacing-md;
+}
+
+.titleSection {
+  display: flex;
+  gap: @spacing-md;
+  align-items: flex-start;
+}
+
+.courseIcon {
+  font-size: @font-size-lg;
+  color: #1890ff;
+  padding: @spacing-md;
+  background: rgba(24, 144, 255, 0.1);
+  border-radius: @border-radius-lg;
+  transition: all 0.3s ease;
+
+  .courseCard:hover & {
+    background: rgba(24, 144, 255, 0.15);
+  }
+}
+
+.courseTitle {
+  font-size: @font-size-lg;
+  font-weight: @font-weight-medium;
+  color: @heading-color;
+  margin: 0 0 @spacing-md;
+  line-height: @line-height-base;
+}
+
+.courseStats {
+  display: flex;
+  align-items: center;
+  gap: @spacing-md;
+  color: @text-color-secondary;
+  font-size: @font-size-base;
+
+  .divider {
+    color: @border-color-base;
+  }
+
+  :global(.anticon) {
+    margin-right: @spacing-xs;
+  }
+}
+
+.expandIcon {
+  color: @text-color-secondary;
+  font-size: @font-size-lg;
+  transition: all 0.3s ease;
+  padding: @spacing-md;
+  margin: -@spacing-md;
+}
+
+.progressSection {
+  margin-top: @spacing-md;
+
+  :global(.ant-progress) {
+    display: flex;
+    align-items: center;
+    gap: @spacing-xs;
+    line-height: 1;
+    
+    .ant-progress-outer {
+      flex: 1;
+      margin-right: 0;
+    }
+    
+    .ant-progress-bg {
+      height: 6px !important;
+      border-radius: 3px;
+    }
+
+    .ant-progress-text {
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+      margin: 0;
+      min-width: 45px;
+      text-align: right;
+    }
+  }
+}
+
+.progressText {
+  display: flex;
+  align-items: center;
+  gap: @spacing-xs;
+  margin-bottom: @spacing-xs;
+  color: @text-color-secondary;
+  font-size: @font-size-base;
+  
+  :global(.anticon) {
+    color: @success-color;
+  }
+}
+
+// 抽屉样式
+.courseDrawer {
+  :global(.ant-drawer-header) {
+    padding: @spacing-lg @spacing-xl;
+    border-bottom: 1px solid @border-color-base;
+  }
+
+  :global(.ant-drawer-body) {
+    padding: 0;
+  }
+}
+
+.drawerTitle {
+  h3 {
+    font-size: @h2-size;
+    font-weight: @font-weight-medium;
+    color: @heading-color;
+    margin: 0 0 @spacing-md;
+  }
+}
+
+.drawerStats {
+  display: flex;
+  align-items: center;
+  gap: @spacing-md;
+  color: @text-color-secondary;
+  font-size: @font-size-base;
+
+  .divider {
+    color: @border-color-base;
+  }
+
+  :global(.anticon) {
+    margin-right: @spacing-xs;
+  }
+}
+
+.drawerContent {
+  padding: @spacing-xl;
+}
+
+.drawerProgress {
+  margin-bottom: @spacing-xl;
+}
+
+.chapterList {
+  display: flex;
+  flex-direction: column;
+  gap: @spacing-md;
+}
+
+.chapterItem {
+  padding: @spacing-md;
+  background: #fafafa;
+  border-radius: @border-radius-lg;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: #f0f7ff;
+  }
+
+  .chapterNumber {
+    display: block;
+    font-size: @font-size-base;
+    color: @primary-color;
+    margin-bottom: @spacing-xs;
+  }
+}
+
+.courseCenter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background-color: #f8fafc;
+}
+
+@media screen and (max-width: @screen-md) {
+  .container {
+    padding: @spacing-md;
+  }
+
+  .courseGrid {
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .content {
+    width: 95%;
+    padding: @spacing-lg 0;
+  }
+
+  .courseGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .courseTitle {
+    font-size: @font-size-base;
+  }
+
+  .courseIcon {
+    font-size: @font-size-base;
+    padding: @spacing-md;
+  }
+
+  .courseDrawer {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .courseGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .courseTitle {
+    font-size: @font-size-base;
+  }
+
+  .courseIcon {
+    font-size: @font-size-base;
+    padding: @spacing-md;
+  }
+}
+
+.overview {
+  .courseInfo {
+    display: flex;
+    gap: @spacing-xl;
+    
+    .mainInfo {
+      flex: 1;
+      
+      h1 {
+        font-size: @h1-size;
+        font-weight: @font-weight-bold;
+        color: @heading-color;
+        margin-bottom: @spacing-md;
+      }
+      
+      .description {
+        font-size: @font-size-lg;
+        color: @text-color-secondary;
+        margin-bottom: @spacing-xl;
+        line-height: @line-height-base;
+      }
+      
+      .stats {
+        display: flex;
+        gap: @spacing-xl;
+        color: @text-color-secondary;
+        margin-bottom: @spacing-xl;
+        
+        span {
+          display: flex;
+          align-items: center;
+          gap: @spacing-xs;
+        }
+      }
+
+      .progressWrapper {
+        background: fade(@primary-color, 2%);
+        padding: @spacing-lg;
+        border-radius: @border-radius-lg;
+        border: 1px solid fade(@primary-color, 10%);
+
+        .progressHeader {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: @spacing-md;
+          color: @text-color;
+          font-weight: @font-weight-medium;
+
+          .progressText {
+            color: @primary-color;
+          }
+        }
+      }
+    }
+    
+    .teacherInfo {
+      text-align: center;
+      padding: @spacing-lg;
+      background: fade(@secondary-color, 5%);
+      border-radius: @border-radius-lg;
+      
+      .teacherDetail {
+        margin-top: @spacing-md;
+        
+        h3 {
+          font-size: @font-size-lg;
+          font-weight: @font-weight-medium;
+          color: @heading-color;
+          margin-bottom: @spacing-xs;
+        }
+        
+        p {
+          color: @text-color-secondary;
+          font-size: @font-size-base;
+        }
+      }
+    }
+  }
+}
+
+.chapters {
+  .chapterHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .chapterTitle {
+      font-size: @font-size-lg;
+      font-weight: @font-weight-medium;
+      color: @heading-color;
+    }
+  }
+  
+  .chapterContent {
+    padding: @spacing-lg 0;
+    
+    p {
+      color: @text-color-secondary;
+      margin-bottom: @spacing-xl;
+      line-height: @line-height-base;
+    }
+    
+    .objectives {
+      margin-bottom: @spacing-xl;
+      
+      h4 {
+        font-size: @font-size-lg;
+        font-weight: @font-weight-medium;
+        color: @heading-color;
+        margin-bottom: @spacing-md;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          color: @text-color;
+          margin-bottom: @spacing-md;
+          display: flex;
+          align-items: center;
+          gap: @spacing-sm;
+          
+          .objectiveIcon {
+            color: @success-color;
+          }
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    
+    .lessons {
+      .lesson {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: @spacing-md;
+        background: fade(@primary-color, 2%);
+        border-radius: @border-radius-base;
+        margin-bottom: @spacing-sm;
+        transition: @transition-base;
+        
+        &:hover {
+          background: fade(@primary-color, 5%);
+        }
+        
+        .lessonTitle {
+          color: @text-color;
+          display: flex;
+          align-items: center;
+          gap: @spacing-md;
+
+          .lessonIndex {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: @primary-color;
+            color: white;
+            border-radius: 50%;
+            font-size: @font-size-sm;
+          }
+        }
+        
+        .lessonDuration {
+          color: @text-color-secondary;
+          font-size: @font-size-base;
+        }
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media screen and (max-width: @screen-md) {
+  .container {
+    padding: @spacing-md;
+  }
+  
+  .overview {
+    .courseInfo {
+      flex-direction: column;
+      gap: @spacing-xl;
+      
+      .mainInfo {
+        h1 {
+          font-size: @h2-size;
+        }
+      }
+    }
+  }
+}

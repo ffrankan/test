@@ -29,7 +29,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
       <div className={styles.header}>
         <Space className={styles.duration}>
           <ClockCircleOutlined />
-          <span>{course.duration}</span>
+          <span>{course.totalLessons}课时</span>
         </Space>
         <span className={`${styles.status} ${statusClass}`}>• {status}</span>
       </div>

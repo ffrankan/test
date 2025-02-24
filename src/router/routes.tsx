@@ -42,7 +42,7 @@ const routes: RouteObject[] = [
       },
       {
         path: ':labName/courses/:courseId',
-        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/CourseDetail'))} />,
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/CourseCenter/CourseDetail'))} />,
         handle: {
           title: '课程详情'
         }
