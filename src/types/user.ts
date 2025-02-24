@@ -7,3 +7,13 @@ export interface User {
   grade?: string;
   class?: string;
 }
+
+// 用户相关的课程进度信息
+export interface UserCourseProgress {
+  courseId: number;
+  userId: number;
+  completedLessons: number;
+  totalLessons: number;
+  lastAccessTime: string;
+  isStarted: boolean;
+}

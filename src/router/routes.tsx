@@ -1,11 +1,9 @@
 import { lazy } from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
 
-import ErrorBoundary from '@/components/errorBoundary';
 import LazyImportComponent from '@/components/lazyImportComponent';
 
 import { protectedLoader } from './loader';
-import { usersLoader } from './loader';
 import { tokenLoader } from './loader';
 
 const routes: RouteObject[] = [
@@ -28,32 +26,14 @@ const routes: RouteObject[] = [
       {
         path: 'home',
         element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
-        children: [
-          {
-            path: '',
-            element: <Navigate to="/home/general" replace />,
-          },
-          {
-            path: 'general',
-            element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
-          },
-          {
-            path: 'algorithm',
-            element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
-          },
-          {
-            path: 'psychology',
-            element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
-          },
-          {
-            path: 'aiplus',
-            element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/Home/index'))} />,
-          },
-        ],
       },
       {
-        path: 'course-center/:category',
+        path: ':labName/courses',
         element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/CourseCenter'))} />,
+      },
+      {
+        path: ':labName/courses/:courseId',
+        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/CourseDetail'))} />,
       },
       {
         path: 'user',

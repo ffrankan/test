@@ -1,4 +1,4 @@
-import type {UserCourseProgress} from '@/types/course';
+import {UserCourseProgress} from "@/types/user.ts";
 
 // 模拟用户课程进度数据
 export const userCourseProgress: UserCourseProgress[] = [
