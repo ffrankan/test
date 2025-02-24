@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Layout, theme } from 'antd';
+import { Layout } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import UserAvatar from '@/components/UserAvatar';
 import styles from './index.module.less';
@@ -8,7 +8,7 @@ import styles from './index.module.less';
 const { Header } = Layout;
 
 interface CustomPageHeaderProps {
-  title: string;
+  title: ReactNode;
   showBack?: boolean;
   backPath?: string;
 }
@@ -19,7 +19,6 @@ const CustomPageHeader: React.FC<CustomPageHeaderProps> = ({
   backPath
 }) => {
   const navigate = useNavigate();
-  const { token } = theme.useToken();
 
   const handleBack = () => {
     if (backPath) {
