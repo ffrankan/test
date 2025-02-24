@@ -17,7 +17,6 @@ const App: React.FC = () => {
       <PageHeader 
         title={<PageTitle />}
         showBack={showBack}
-        backPath="/"
       />
       <Content>
         <Outlet />
