@@ -1,0 +1,446 @@
+@import '../../styles/variables.less';
+
+// PDF编辑器主容器
+.pdf-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: @background-color;
+}
+
+// 工具栏样式
+.editor-toolbar {
+  padding: @padding-md;
+  background-color: @bg-card;
+  border-bottom: @border-width-base @border-style-base @border-color-base;
+  box-shadow: @shadow-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: @spacing-md;
+
+    .upload-btn {
+      .button-base();
+      background-color: #ffffff;
+      color: @text-color;
+      border: @border-width-base @border-style-base @border-color-base;
+      
+      &:hover {
+        border-color: @primary-color;
+        color: @primary-color;
+      }
+      
+      &.has-file {
+        color: @success-color;
+        border-color: fade(@success-color, 30%);
+      }
+    }
+  }
+
+  .content-tools {
+    display: flex;
+    gap: @spacing-sm;
+  }
+}
+
+// 工具按钮样式
+.tool-btn {
+  .button-base();
+  background-color: #ffffff;
+  border: @border-width-base @border-style-base @border-color-base;
+  color: @text-color;
+  transition: @transition-hover;
+  
+  &.active {
+    background-color: fade(@primary-color, 8%);
+    border-color: @primary-color;
+    color: @primary-color;
+  }
+  
+  &:hover {
+    background-color: fade(@primary-color, 4%);
+    border-color: fade(@primary-color, 50%);
+    color: @primary-color;
+  }
+  
+  // 工具类型特定样式
+  &.text-tool {
+    .tool-icon {
+      background-color: fade(@info-color, 10%);
+      color: @info-color;
+    }
+  }
+  
+  &.audio-tool {
+    .tool-icon {
+      background-color: fade(@accent-color, 10%);
+      color: @accent-color;
+    }
+  }
+  
+  &.video-tool {
+    .tool-icon {
+      background-color: fade(@secondary-color, 10%);
+      color: @secondary-color;
+    }
+  }
+  
+  &.tool-tool {
+    .tool-icon {
+      background-color: fade(@warning-color, 10%);
+      color: @warning-color;
+    }
+  }
+}
+
+// 保存按钮样式
+.save-btn {
+  .button-base();
+  background-color: @primary-color;
+  color: white;
+  border: none;
+  
+  &:hover {
+    background-color: darken(@primary-color, 5%);
+    box-shadow: @shadow-md;
+  }
+}
+
+// PDF容器样式
+.pdf-container {
+  flex: 1;
+  overflow: auto;
+  padding: @padding-lg;
+  background-color: @bg-gradient-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// PDF文档样式
+.pdf-document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+// 页面容器样式
+.page-container {
+  position: relative;
+  margin-bottom: @spacing-lg;
+  box-shadow: @shadow-md;
+  background-color: @bg-card;
+  border-radius: @border-radius-base;
+  overflow: hidden;
+  transition: @transition-base;
+  
+  &:hover {
+    box-shadow: @shadow-hover;
+  }
+}
+
+// PDF页面样式
+.pdf-page {
+  background-color: white;
+}
+
+// 内容覆盖层样式
+.content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+// 内容项基础样式
+.content-item {
+  position: absolute;
+  background-color: fade(#ffffff, 95%);
+  border-radius: @border-radius-base;
+  padding: @padding-xs;
+  box-shadow: @shadow-sm;
+  pointer-events: auto;
+  z-index: 10;
+  transition: @transition-hover;
+  border: @border-width-base @border-style-base @border-color-base;
+  
+  &:hover {
+    box-shadow: @shadow-hover;
+    border-color: fade(@primary-color, 30%);
+  }
+
+  // 文本内容样式
+  &.content-text {
+    max-width: 240px;
+    word-wrap: break-word;
+    color: @text-color;
+    background: @bg-card;
+    border-left: 3px solid @info-color;
+  }
+
+  // 音频内容样式
+  &.content-audio {
+    background-color: fade(@accent-color, 5%);
+    border: @border-width-base @border-style-base fade(@accent-color, 30%);
+    
+    .media-label {
+      font-size: @font-size-sm;
+      color: @accent-color;
+      margin-bottom: @spacing-xs;
+      font-weight: @font-weight-medium;
+    }
+    
+    audio {
+      max-width: 180px;
+    }
+  }
+
+  // 视频内容样式
+  &.content-video {
+    background-color: fade(@secondary-color, 5%);
+    border: @border-width-base @border-style-base fade(@secondary-color, 30%);
+    
+    .media-label {
+      font-size: @font-size-sm;
+      color: @secondary-color;
+      margin-bottom: @spacing-xs;
+      font-weight: @font-weight-medium;
+    }
+  }
+
+  // 工具内容样式
+  &.content-tool {
+    background-color: fade(@warning-color, 5%);
+    border: @border-width-base @border-style-base fade(@warning-color, 30%);
+    padding: @padding-xs @padding-sm;
+    
+    .tool-icon {
+      margin-right: @spacing-xs;
+      color: @warning-color;
+    }
+  }
+}
+
+// 删除按钮样式
+.remove-btn {
+  position: absolute;
+  top: -@spacing-xs;
+  right: -@spacing-xs;
+  width: 20px;
+  height: 20px;
+  background-color: @error-color;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: @font-size-sm;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.8;
+  transform: scale(0.9);
+  transition: @transition-base;
+  
+  &:hover {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// 编辑内容模态框
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: fade(@heading-color, 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background-color: @bg-card;
+  border-radius: @border-radius-lg;
+  box-shadow: @shadow-md;
+  padding: @padding-lg;
+  width: 90%;
+  max-width: 500px;
+  
+  h3 {
+    margin-bottom: @spacing-md;
+    color: @heading-color;
+    font-weight: @font-weight-medium;
+    font-size: @h4-size;
+  }
+  
+  .form-group {
+    margin-bottom: @spacing-md;
+    
+    label {
+      display: block;
+      margin-bottom: @spacing-xs;
+      color: @text-color;
+      font-size: @font-size-base;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: @padding-sm;
+      border: @border-width-base @border-style-base @border-color-base;
+      border-radius: @border-radius-base;
+      font-size: @font-size-base;
+      color: @text-color;
+      
+      &:focus {
+        outline: none;
+        border-color: @primary-color;
+        box-shadow: 0 0 0 2px fade(@primary-color, 20%);
+      }
+    }
+    
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: @spacing-sm;
+    margin-top: @spacing-lg;
+    
+    button {
+      .button-base();
+      
+      &[type="button"] {
+        background-color: #ffffff;
+        color: @text-color;
+        border: @border-width-base @border-style-base @border-color-base;
+      }
+      
+      &[type="submit"] {
+        background-color: @primary-color;
+        color: white;
+        border: none;
+      }
+    }
+  }
+}
+
+// 空状态提示
+.empty-state {
+  .card-base();
+  text-align: center;
+  padding: @padding-xl;
+  margin: @margin-xl auto;
+  max-width: 500px;
+  
+  h3 {
+    color: @heading-color;
+    margin-bottom: @spacing-md;
+  }
+  
+  p {
+    color: @text-color-secondary;
+    margin-bottom: @spacing-lg;
+  }
+  
+  .upload-btn {
+    .button-base();
+    background-color: @primary-color;
+    color: white;
+    border: none;
+    display: inline-block;
+  }
+}
+
+// 页面导航
+.page-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: @padding-sm;
+  margin: @margin-sm 0 @margin-lg;
+  
+  .page-info {
+    padding: @padding-xs @padding-sm;
+    border-radius: @border-radius-base;
+    background-color: #ffffff;
+    color: @text-color;
+    font-size: @font-size-sm;
+    margin: 0 @margin-sm;
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .nav-btn {
+    .button-base();
+    background-color: #ffffff;
+    color: @text-color;
+    border: @border-width-base @border-style-base @border-color-base;
+    padding: @padding-xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// 响应式调整
+@media screen and (max-width: @screen-md) {
+  .editor-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .left-section {
+      margin-bottom: @spacing-sm;
+    }
+    
+    .content-tools {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      
+      button {
+        flex: 1 0 calc(50% - @spacing-xs);
+        margin-bottom: @spacing-xs;
+      }
+    }
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: @padding-md;
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pdf-container {
+    padding: @padding-sm;
+  }
+  
+  .content-tools button {
+    font-size: @font-size-sm;
+    padding: @padding-xs @padding-sm;
+  }
+}

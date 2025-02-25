@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 import { courseDetails } from '@/constants/course';
 import styles from './index.module.less';
+import { CourseEditor } from '@/components/CourseEditor';
 
 const CourseDetail: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
@@ -27,7 +28,6 @@ const CourseDetail: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      
       <div className={styles.content}>
         <div className={styles.overview}>
           <Card>
@@ -109,6 +109,9 @@ const CourseDetail: React.FC = () => {
             </Collapse>
           </Card>
         </div>
+        
+        {/* 课程编辑器区域 - 这里使用我们更新的CourseEditor组件 */}
+        <CourseEditor />
       </div>
     </div>
   );

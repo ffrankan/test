@@ -1,0 +1,324 @@
+@import '../../styles/variables.less';
+
+.courseEditorCard {
+  border-radius: @border-radius-lg;
+  box-shadow: @shadow-sm;
+  margin-bottom: @spacing-xl;
+  
+  :global(.ant-card-head) {
+    padding: @padding-md @padding-lg;
+    
+    .ant-card-head-title {
+      font-size: @h3-size;
+      font-weight: @font-weight-medium;
+    }
+  }
+}
+
+.editorContainer {
+  min-height: 500px;
+}
+
+// 上传区域样式
+.uploadArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background-color: @bg-gradient-end;
+  border-radius: @border-radius-base;
+  padding: @padding-xl;
+  
+  :global(.ant-empty-description) {
+    color: @text-color-secondary;
+    font-size: @font-size-lg;
+    margin-bottom: @spacing-lg;
+  }
+}
+
+// 编辑工具栏
+.editorToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: @spacing-md;
+  padding: @padding-md;
+  background-color: @bg-card;
+  border-radius: @border-radius-base;
+  box-shadow: @shadow-sm;
+  
+  .rightSection {
+    display: flex;
+    align-items: center;
+  }
+}
+
+// 页面导航
+.pageNavigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: @spacing-md 0;
+  
+  .pageInfo {
+    margin: 0 @spacing-md;
+    padding: @padding-xs @padding-sm;
+    background: @white;
+    border-radius: @border-radius-base;
+    box-shadow: @shadow-sm;
+    font-size: @font-size-base;
+    min-width: 70px;
+    text-align: center;
+  }
+}
+
+// PDF容器
+.pdfContainer {
+  display: flex;
+  justify-content: center;
+  padding: @padding-lg;
+  background-color: @bg-gradient-end;
+  border-radius: @border-radius-base;
+  min-height: 500px;
+  overflow: auto;
+}
+
+.pdfDocument {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pageContainer {
+  position: relative;
+  margin-bottom: @spacing-lg;
+  box-shadow: @shadow-md;
+  background-color: white;
+  border-radius: @border-radius-base;
+  overflow: hidden;
+}
+
+.pdfPage {
+  background-color: white;
+}
+
+.contentOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+// 内容项样式
+.contentItem {
+  position: absolute;
+  background-color: fade(@white, 95%);
+  border-radius: @border-radius-base;
+  padding: @padding-xs;
+  box-shadow: @shadow-sm;
+  pointer-events: auto;
+  z-index: 10;
+  transition: @transition-hover;
+  border: @border-width-base @border-style-base @border-color-base;
+  
+  &:hover {
+    box-shadow: @shadow-hover;
+  }
+}
+
+// 文本内容
+.contentText {
+  max-width: 240px;
+  word-wrap: break-word;
+  color: @text-color;
+  padding: @padding-xs;
+  border-left: 3px solid @info-color;
+}
+
+// 音频内容
+.contentAudio {
+  background-color: fade(@accent-color, 5%);
+  border: @border-width-base @border-style-base fade(@accent-color, 30%);
+  
+  .mediaLabel {
+    font-size: @font-size-sm;
+    color: @accent-color;
+    margin-bottom: @spacing-xs;
+    font-weight: @font-weight-medium;
+  }
+  
+  audio {
+    max-width: 180px;
+  }
+}
+
+// 视频内容
+.contentVideo {
+  background-color: fade(@secondary-color, 5%);
+  border: @border-width-base @border-style-base fade(@secondary-color, 30%);
+  
+  .mediaLabel {
+    font-size: @font-size-sm;
+    color: @secondary-color;
+    margin-bottom: @spacing-xs;
+    font-weight: @font-weight-medium;
+  }
+}
+
+// 工具内容
+.contentTool {
+  background-color: fade(@warning-color, 5%);
+  border: @border-width-base @border-style-base fade(@warning-color, 30%);
+  padding: @padding-xs;
+  
+  .toolIcon {
+    margin-right: @spacing-xs;
+    color: @warning-color;
+  }
+}
+
+// 删除按钮
+.removeBtn {
+  position: absolute;
+  top: -@spacing-xs;
+  right: -@spacing-xs;
+  width: 20px;
+  height: 20px;
+  background-color: @error-color;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: @font-size-sm;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.8;
+  transform: scale(0.9);
+  transition: @transition-base;
+  
+  &:hover {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// 编辑模态框
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: fade(@heading-color, 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: @bg-card;
+  border-radius: @border-radius-lg;
+  box-shadow: @shadow-md;
+  padding: @padding-lg;
+  width: 90%;
+  max-width: 500px;
+  
+  h3 {
+    margin-bottom: @spacing-md;
+    color: @heading-color;
+    font-weight: @font-weight-medium;
+    font-size: @h4-size;
+  }
+  
+  .formGroup {
+    margin-bottom: @spacing-md;
+    
+    label {
+      display: block;
+      margin-bottom: @spacing-xs;
+      color: @text-color;
+      font-size: @font-size-base;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: @padding-sm;
+      border: @border-width-base @border-style-base @border-color-base;
+      border-radius: @border-radius-base;
+      font-size: @font-size-base;
+      color: @text-color;
+      
+      &:focus {
+        outline: none;
+        border-color: @primary-color;
+        box-shadow: 0 0 0 2px fade(@primary-color, 20%);
+      }
+    }
+    
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+  }
+  
+  .formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: @spacing-sm;
+    margin-top: @spacing-lg;
+    
+    button {
+      padding: @padding-sm @padding-md;
+      border-radius: @border-radius-base;
+      cursor: pointer;
+      transition: @transition-base;
+      
+      &[type="button"] {
+        background-color: @white;
+        color: @text-color;
+        border: @border-width-base @border-style-base @border-color-base;
+        
+        &:hover {
+          border-color: @text-color-secondary;
+          color: @text-color-secondary;
+        }
+      }
+      
+      &[type="submit"] {
+        background-color: @primary-color;
+        color: white;
+        border: none;
+        
+        &:hover {
+          background-color: darken(@primary-color, 5%);
+        }
+      }
+    }
+  }
+}
+
+// 响应式调整
+@media screen and (max-width: @screen-md) {
+  .editorToolbar {
+    flex-direction: column;
+    gap: @spacing-md;
+    
+    .rightSection {
+      width: 100%;
+      justify-content: center;
+      margin-top: @spacing-sm;
+    }
+  }
+  
+  .modalContent {
+    width: 95%;
+    padding: @padding-md;
+  }
+}
